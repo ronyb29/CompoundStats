@@ -3,11 +3,11 @@ SimpleTimer::SimpleTimer(const int duration){
   Duration=duration;
 }
 
-SimpleTimer::IsDone(){
+bool SimpleTimer::IsDone(){
   return (millis()-Start >= Duration);
 }
 
-SimpleTimer::IsDoneReset(){
+bool SimpleTimer::IsDoneReset(){
   if (millis()-Start >= Duration){
     Reset();
     return 1;
@@ -15,10 +15,10 @@ SimpleTimer::IsDoneReset(){
   return 0;
 }
 
-SimpleTimer::Remaining(){
+unsigned long SimpleTimer::Remaining(){
   return millis() - (Start+Duration);
 }
 
-SimpleTimer::Reset(){
+void SimpleTimer::Reset(){
   Start=millis();
 }

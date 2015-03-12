@@ -5,32 +5,32 @@ StatClass::StatClass(float lb, float ub){
   frequency=0;
 }
 
-StatClass::getLowerBound(){
+long StatClass::getLowerBound(){
   return lowerBound;
 }
 
-StatClass::getUpperBound(){
+long StatClass::getUpperBound(){
   return upperBound;
 }
 
-StatClass::getFrequency(){
+long StatClass::getFrequency(){
   return frequency;
 }
 
-StatClass::getMidPoint(){
+float StatClass::getMidPoint(){
   return midPoint;
 }
 
-StatClass::getSum(){
+float StatClass::getSum(){
   return frequency *midPoint;
 }
 
-StatClass::ValueBelongs(float val){
+bool StatClass::ValueBelongs(float val){
   //Checks if val belongs to [lb,ub)
   return val<upperBound && val>=lowerBound;
 }
 
-StatClass::ValueBelongsAdd(float val){
+bool StatClass::ValueBelongsAdd(float val){
   if (ValueBelongs(val)){
     Add(val);
     return 1;
@@ -38,7 +38,7 @@ StatClass::ValueBelongsAdd(float val){
   return 0;
 }
 
-StatClass::Add(int value){
+void StatClass::Add(int value){
   frequency++;
 }
 
@@ -68,14 +68,14 @@ CompoundStats::~CompoundStats(){
   free(classes);
 }
 
-CompoundStats::AddStat(float value){
+void CompoundStats::AddStat(float value){
   for(int i =0; i< classCount; i++)
     if (classes[i]->ValueBelongsAdd(value))
       break;
   valueCount++;
 }
 
-CompoundStats::Mean(){
+float CompoundStats::Mean(){
   float sum=0;
   for(int i =0; i< classCount; i++){
     sum += classes[i]-> getSum();
@@ -83,7 +83,7 @@ CompoundStats::Mean(){
   return sum/valueCount;
 }
 
-CompoundStats::Median(){
+float CompoundStats::Median(){
   // the median group is the one whose accumulated freq (sum of freqs of groups before)
   // would be the first one thats bigger than n/2 (half the entries)
   float n2 = valueCount/2;
@@ -104,17 +104,19 @@ CompoundStats::Median(){
   return 0.0f;
 }
 
-CompoundStats::Mode(){
+float CompoundStats::Mode(){
   //the modal group is the one whose freq is higher
   //TODO: implement
 }
 
-CompoundStats::MeanDeviation(){
+float CompoundStats::MeanDeviation(){
 //TODO: implement
 }
-CompoundStats::Variance(){
+
+float CompoundStats::Variance(){
 //TODO: implement
 }
-CompoundStats::StandarDeviation(){
+
+float CompoundStats::StandarDeviation(){
 //TODO: implement
 }

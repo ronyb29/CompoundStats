@@ -11,8 +11,8 @@ public:
   long getFrequency();
   float getMidPoint();
   float getSum();
-  int ValueBelongs(float val);
-  int ValueBelongsAdd(float val);
+  bool ValueBelongs(float val);
+  bool ValueBelongsAdd(float val);
   void Add(int value);
 };
 
